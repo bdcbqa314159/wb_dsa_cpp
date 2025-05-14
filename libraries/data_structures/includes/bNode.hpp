@@ -4,30 +4,15 @@
 
 #include <iostream>
 
-class Node {
+class bNode {
  public:
-  int value{0};
-  Node* next{nullptr};
+  int value{};
+  bNode* next{nullptr};
 
-  Node() = default;
-  Node(int otherValue) : value(otherValue), next(nullptr) {}
-
-  ~Node() {
-    if (next != nullptr) {
-      delete next;
-    }
-  }
+  bNode() = default;
+  bNode(int otherValue);
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Node& obj) {
-  Node temp(obj);
-  Node* pTemp = &temp;
-  while (pTemp != nullptr) {
-    os << pTemp->value << " -> ";
-    pTemp = pTemp->next;
-  }
-  os << "nullptr\n";
-  return os;
-}
+std::ostream& operator<<(std::ostream& os, const bNode& obj);
 
 #endif  // BNODE_HPP

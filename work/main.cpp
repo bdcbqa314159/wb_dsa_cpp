@@ -14,7 +14,6 @@ inline std::ostream& operator<<(std::ostream& os, const Node& obj) {
   os << obj.value;
   if (obj.next != nullptr) {
     os << " -> ";
-    os << *obj.next;
   }
 
   return os;
@@ -28,7 +27,7 @@ int main() {
   n1.next = &n2;
   n2.next = &n3;
 
-  std::cout << n1 << "\n";
+  std::cout << n1 << n2 << n3 << "\n";
 
   return 0;
 }
