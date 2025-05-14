@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 
 class Node {
@@ -10,13 +11,12 @@ class Node {
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Node& obj) {
-  Node temp(obj);
-  Node* pTemp = &temp;
-  while (pTemp != nullptr) {
-    os << pTemp->value << " -> ";
-    pTemp = pTemp->next;
+  os << obj.value;
+  if (obj.next != nullptr) {
+    os << " -> ";
+    os << *obj.next;
   }
-  os << "nullptr";
+
   return os;
 }
 
