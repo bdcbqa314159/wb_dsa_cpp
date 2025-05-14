@@ -1,33 +1,80 @@
 #include <cstddef>
 #include <iostream>
 
-class Node {
- public:
-  int value{0};
-  Node* next{nullptr};
+#include "bLinkedList.hpp"
 
-  Node() = default;
-  Node(int otherValue) : value(otherValue), next(nullptr) {}
-};
-
-inline std::ostream& operator<<(std::ostream& os, const Node& obj) {
-  os << obj.value;
-  if (obj.next != nullptr) {
-    os << " -> ";
-  }
-
-  return os;
-}
-
+using namespace std;
 int main() {
-  Node n1(2);
-  Node n2(3);
-  Node n3(4);
+  bLinkedList linkedList = bLinkedList();
 
-  n1.next = &n2;
-  n2.next = &n3;
+  // 43->NULL
+  linkedList.insertHead(43);
 
-  std::cout << n1 << n2 << n3 << "\n";
+  // 76->43->NULL
+  linkedList.insertHead(76);
+
+  // 76->43->15->NULL
+  linkedList.insertTail(15);
+
+  // 76->43->15->44->NULL
+  linkedList.insertTail(44);
+
+  // Print the list element
+  cout << "First Printed:" << endl;
+  cout << linkedList;
+  cout << endl;
+
+  // 76->43->15->44->100->NULL
+  linkedList.insertAt(4, 100);
+
+  // 76->43->15->48->44->100->NULL
+  linkedList.insertAt(3, 48);
+
+  // 22->76->43->15->48->44->100->NULL
+  linkedList.insertAt(0, 22);
+
+  // Print the list element
+  cout << "Second Printed:" << endl;
+  cout << linkedList;
+  cout << endl;
+
+  // Get value of the second index
+  // It should be 43
+  cout << "Get value of the second index:" << endl;
+  bNode* get = linkedList.get(2);
+  if (get != NULL)
+    cout << get->value;
+  else
+    cout << "not found";
+  cout << endl << endl;
+
+  // Find the position of value 15
+  // It must be 3
+  cout << "The position of value 15:" << endl;
+  int srch = linkedList.find(15);
+  cout << srch << endl << endl;
+
+  // Remove first element
+  cout << "Remove the first element:" << endl;
+  linkedList.removeAt(0);
+  // 76->43->15->48->44->100->NULL
+  cout << linkedList;
+  cout << endl;
+
+  // Remove fifth element
+  cout << "Remove the fifth element:" << endl;
+  linkedList.removeAt(4);
+  // 76->43->15->48->100->NULL
+  cout << linkedList;
+  cout << endl;
+
+  // Remove tenth element
+  cout << "Remove the tenth element:" << endl;
+  linkedList.removeAt(9);
+  // Nothing happen
+  // 76->43->15->48->100->NULL
+  cout << linkedList;
+  cout << endl;
 
   return 0;
 }
