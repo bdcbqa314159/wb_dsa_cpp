@@ -2,34 +2,36 @@
 
 #include <cstddef>
 #include <limits>
+#include <ostream>
 
 #include "bNode.hpp"
 
 constexpr size_t size_t_max = std::numeric_limits<size_t>::max();
 
 bNode* bLinkedList::get(size_t index) const {
-  if (index >= m_size) return nullptr;
-
-  bNode* current = head;
-
-  for (size_t i = 0; i < index; ++i) {
-    current = current->next;
+  if (index >= m_size) {
+    return nullptr;
   }
 
-  return current;
+  bNode* node = head;
+  for (size_t i = 0; i < index; ++i) {
+    node = node->next;
+  }
+
+  return node;
 }
+
+size_t bLinkedList::size() const { return m_size; }
 
 size_t bLinkedList::find(int value) const {
   if (m_size == 0) {
     return size_t_max;
   }
 
-  size_t index = 0;
   bNode* node = head;
-
+  size_t index = 0;
   while (node->value != value) {
     ++index;
-
     node = node->next;
     if (node == nullptr) {
       return size_t_max;
@@ -48,14 +50,13 @@ void bLinkedList::insertHead(int value) {
   }
 
   ++m_size;
+  return;
 }
 
 void bLinkedList::insertTail(int value) {
   if (m_size == 0) {
-    insertHead(value);
-    return;
+    return insertHead(value);
   }
-
   bNode* node = new bNode(value);
   tail->next = node;
   tail = node;
@@ -63,15 +64,16 @@ void bLinkedList::insertTail(int value) {
 }
 
 void bLinkedList::insertAt(size_t index, int value) {
-  if (index > m_size) return;
-  if (index == 0) {
-    insertHead(value);
+  if (index > m_size) {
     return;
   }
 
+  if (index == 0) {
+    return insertHead(value);
+  }
+
   else if (index == m_size) {
-    insertTail(value);
-    return;
+    return insertTail(value);
   }
 
   else {
@@ -81,17 +83,17 @@ void bLinkedList::insertAt(size_t index, int value) {
     }
 
     bNode* nextNode = prevNode->next;
-
-    bNode* insertNode = new bNode(value);
-    prevNode->next = insertNode;
-    insertNode->next = nextNode;
+    bNode* node = new bNode(value);
+    prevNode->next = node;
+    node->next = nextNode;
     ++m_size;
-    return;
   }
 }
 
 void bLinkedList::removeHead() {
-  if (m_size == 0) return;
+  if (m_size == 0) {
+    return;
+  }
 
   bNode* node = head;
   head = head->next;
@@ -105,8 +107,7 @@ void bLinkedList::removeTail() {
   }
 
   if (m_size == 1) {
-    removeHead();
-    return;
+    return removeHead();
   }
 
   bNode* prevNode = head;
@@ -118,39 +119,42 @@ void bLinkedList::removeTail() {
   }
 
   prevNode->next = nullptr;
-  tail = prevNode;
   delete node;
+  tail = prevNode;
   --m_size;
 }
 
 void bLinkedList::removeAt(size_t index) {
-  if (m_size == 0) return;
-  if (index >= m_size) return;
+  if (index > m_size) {
+    return;
+  }
+
+  if (m_size == 0) {
+    return;
+  }
+
   if (index == 0) {
-    removeHead();
-    return;
+    return removeHead();
   }
 
-  if (index == m_size - 1) {
-    removeTail();
-    return;
+  else if (index == m_size - 1) {
+    return removeTail();
   }
 
-  bNode* prevNode = head;
+  else {
+    bNode* prevNode = head;
+    for (size_t i = 0; i < index - 1; ++i) {
+      prevNode = prevNode->next;
+    }
 
-  for (size_t i = 0; i < index - 1; ++i) {
-    prevNode = prevNode->next;
+    bNode* node = prevNode->next;
+    bNode* nextNode = node->next;
+
+    prevNode->next = nextNode;
+    delete node;
+    --m_size;
   }
-
-  bNode* node = prevNode->next;
-  bNode* nextNode = node->next;
-
-  prevNode->next = nextNode;
-  delete node;
-  --m_size;
 }
-
-size_t bLinkedList::size() const { return m_size; }
 
 bLinkedList::~bLinkedList() {
   while (m_size > 0) {
@@ -159,10 +163,12 @@ bLinkedList::~bLinkedList() {
 }
 
 std::ostream& operator<<(std::ostream& os, const bLinkedList& obj) {
-  bNode* node = obj.head;
+  bNode* node = obj.get(0);
+
   while (node) {
     os << *node;
     node = node->next;
   }
+
   return os;
 }
