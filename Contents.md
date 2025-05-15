@@ -4,4 +4,4 @@
 
 ## Chapter 2: Storing Data in Lists and Linked Lists
 
-## Constructing Stacks and Queues
+## Chapter 3: Constructing Stacks and Queues
