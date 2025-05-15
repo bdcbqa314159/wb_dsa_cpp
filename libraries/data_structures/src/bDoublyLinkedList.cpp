@@ -14,6 +14,7 @@ bDoublyNode* bDoublyLinkedList::get(size_t index) const {
   }
 
   bDoublyNode* node = head;
+
   for (size_t i = 0; i < index; ++i) {
     node = node->next;
   }
@@ -28,16 +29,34 @@ size_t bDoublyLinkedList::find(int value) const {
     return size_t_max;
   }
 
-  bDoublyNode* node = head;
   size_t index = 0;
+  bDoublyNode* node = head;
   while (node->value != value) {
     ++index;
     node = node->next;
+
     if (node == nullptr) {
       return size_t_max;
     }
   }
   return index;
+}
+
+std::ostream& operator<<(std::ostream& os, const bDoublyLinkedList& obj) {
+  bDoublyNode* node = obj.get(0);
+  os << "h:";
+  while (node) {
+    os << *node;
+    node = node->next;
+  }
+  os << ":t";
+  return os;
+}
+
+bDoublyLinkedList::~bDoublyLinkedList() {
+  while (m_size > 0) {
+    removeHead();
+  }
 }
 
 void bDoublyLinkedList::insertHead(int value) {
@@ -55,17 +74,18 @@ void bDoublyLinkedList::insertHead(int value) {
   }
 
   ++m_size;
-  return;
 }
 
 void bDoublyLinkedList::insertTail(int value) {
   if (m_size == 0) {
     return insertHead(value);
   }
+
   bDoublyNode* node = new bDoublyNode(value);
   tail->next = node;
   node->prev = tail;
   tail = node;
+
   ++m_size;
 }
 
@@ -82,20 +102,21 @@ void bDoublyLinkedList::insertAt(size_t index, int value) {
     return insertTail(value);
   }
 
-  else {
-    bDoublyNode* prevNode = head;
-    for (size_t i = 0; i < index - 1; ++i) {
-      prevNode = prevNode->next;
-    }
-
-    bDoublyNode* nextNode = prevNode->next;
-    bDoublyNode* node = new bDoublyNode(value);
-    prevNode->next = node;
-    node->prev = prevNode;
-    node->next = nextNode;
-    nextNode->prev = node;
-    ++m_size;
+  bDoublyNode* prevNode = head;
+  for (size_t i = 0; i < index - 1; ++i) {
+    prevNode = prevNode->next;
   }
+
+  bDoublyNode* node = new bDoublyNode(value);
+  bDoublyNode* nextNode = prevNode->next;
+
+  prevNode->next = node;
+  node->prev = prevNode;
+  node->next = nextNode;
+  nextNode->prev = node;
+
+  ++m_size;
+  return;
 }
 
 void bDoublyLinkedList::removeHead() {
@@ -105,11 +126,12 @@ void bDoublyLinkedList::removeHead() {
 
   bDoublyNode* node = head;
   head = head->next;
-  delete node;
 
   if (head) {
     head->prev = nullptr;
   }
+
+  delete node;
   --m_size;
 }
 
@@ -131,10 +153,6 @@ void bDoublyLinkedList::removeTail() {
 }
 
 void bDoublyLinkedList::removeAt(size_t index) {
-  if (index > m_size) {
-    return;
-  }
-
   if (m_size == 0) {
     return;
   }
@@ -161,23 +179,6 @@ void bDoublyLinkedList::removeAt(size_t index) {
 
     delete node;
     --m_size;
+    return;
   }
-}
-
-bDoublyLinkedList::~bDoublyLinkedList() {
-  while (m_size > 0) {
-    removeHead();
-  }
-}
-
-std::ostream& operator<<(std::ostream& os, const bDoublyLinkedList& obj) {
-  bDoublyNode* node = obj.get(0);
-  os << "h:";
-  while (node) {
-    os << *node;
-    node = node->next;
-  }
-  os << ":t";
-
-  return os;
 }
