@@ -15,7 +15,7 @@ class bLinkedList {
   bLinkedList() = default;
   ~bLinkedList();
 
-  bNode* get(size_t index);
+  bNode* get(size_t index) const;
 
   void insertHead(int value);
   void insertTail(int value);
