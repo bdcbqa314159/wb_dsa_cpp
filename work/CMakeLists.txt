@@ -6,6 +6,7 @@ add_executable(work main.cpp)
 target_include_directories(work PUBLIC ${includes})
 target_link_libraries(work data_structures)
 
-# add_executable(cards_test cards_test.cpp)
-# target_include_directories(cards_test PUBLIC ${includes})
-# target_link_libraries(cards_test utils cards)
+add_executable(work1 main1.cpp)
+target_include_directories(work1 PUBLIC ${includes})
+target_link_libraries(work1 data_structures)
+
