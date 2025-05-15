@@ -172,11 +172,12 @@ bDoublyLinkedList::~bDoublyLinkedList() {
 
 std::ostream& operator<<(std::ostream& os, const bDoublyLinkedList& obj) {
   bDoublyNode* node = obj.get(0);
-
+  os << "h:";
   while (node) {
     os << *node;
     node = node->next;
   }
+  os << ":t";
 
   return os;
 }
