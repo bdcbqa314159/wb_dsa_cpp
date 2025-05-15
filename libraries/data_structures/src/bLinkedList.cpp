@@ -5,6 +5,8 @@
 
 #include "bNode.hpp"
 
+constexpr size_t size_t_max = std::numeric_limits<size_t>::max();
+
 bNode* bLinkedList::get(size_t index) const {
   if (index >= m_size) return nullptr;
 
@@ -19,7 +21,7 @@ bNode* bLinkedList::get(size_t index) const {
 
 size_t bLinkedList::find(int value) const {
   if (m_size == 0) {
-    return std::numeric_limits<size_t>::max();
+    return size_t_max;
   }
 
   size_t index = 0;
@@ -30,7 +32,7 @@ size_t bLinkedList::find(int value) const {
 
     node = node->next;
     if (node == nullptr) {
-      return std::numeric_limits<size_t>::max();
+      return size_t_max;
     }
   }
   return index;
