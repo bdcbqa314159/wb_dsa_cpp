@@ -14,9 +14,9 @@ set(sources_queue mainQueue.cpp)
 add_executable(queue_main ${sources_queue})
 target_include_directories(queue_main PUBLIC ${includes})
 
-# set(sources_linked_list mainLinkedList.cpp)
-# add_executable(linked_list_main ${sources_linked_list})
-# target_include_directories(linked_list_main PUBLIC ${includes})
+set(sources_deque mainDeque.cpp)
+add_executable(deque_main ${sources_deque})
+target_include_directories(deque_main PUBLIC ${includes})
 
 # set(sources_doubly_linked_list mainDoublyLinkedList.cpp)
 # add_executable(doubly_linked_list_main ${sources_doubly_linked_list})
