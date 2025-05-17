@@ -4,9 +4,14 @@
 
 #include "bNode.hpp"
 
-bool bStack::isEmpty() const { return (m_size == 0); }
+bNode* bStack::getTop() const {
+  if (m_top) {
+    return m_top;
+  }
+  return nullptr;
+}
 
-bNode* bStack::getTop() const { return m_top; }
+bool bStack::isEmpty() const { return (m_size == 0); }
 
 int bStack::top() const {
   if (m_top) {
@@ -20,13 +25,17 @@ void bStack::push(int val) {
 
   node->next = m_top;
   m_top = node;
+
   ++m_size;
 }
 
 void bStack::pop() {
+  if (m_size == 0) {
+    return;
+  }
+
   bNode* node = m_top;
   m_top = m_top->next;
-
   delete node;
   --m_size;
 }
@@ -38,11 +47,11 @@ bStack::~bStack() {
 }
 
 std::ostream& operator<<(std::ostream& os, const bStack& obj) {
-  bNode* top = obj.getTop();
+  bNode* node = obj.getTop();
 
-  while (top) {
-    os << *top;
-    top = top->next;
+  while (node) {
+    os << *node;
+    node = node->next;
   }
   return os;
 }
