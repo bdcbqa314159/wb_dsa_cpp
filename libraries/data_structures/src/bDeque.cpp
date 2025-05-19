@@ -62,7 +62,9 @@ void bDeque::dequeueFront() {
 
   bDoublyNode* node = m_front;
   m_front = m_front->next;
-  m_front->prev = nullptr;
+  if (m_front) {
+    m_front->prev = nullptr;
+  }
 
   delete node;
   --m_size;

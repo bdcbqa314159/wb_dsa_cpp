@@ -14,3 +14,11 @@ add_executable(work2 main2.cpp)
 target_include_directories(work2 PUBLIC ${includes})
 target_link_libraries(work2 data_structures)
 
+add_executable(work3 main3.cpp)
+target_include_directories(work3 PUBLIC ${includes})
+target_link_libraries(work3 data_structures)
+
+add_executable(work4 main4.cpp)
+target_include_directories(work4 PUBLIC ${includes})
+target_link_libraries(work4 data_structures)
+
