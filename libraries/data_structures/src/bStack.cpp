@@ -4,12 +4,7 @@
 
 #include "bNode.hpp"
 
-bNode* bStack::getTop() const {
-  if (m_top) {
-    return m_top;
-  }
-  return nullptr;
-}
+bNode* bStack::getTop() const { return m_top; }
 
 bool bStack::isEmpty() const { return (m_size == 0); }
 
@@ -20,9 +15,8 @@ int bStack::top() const {
   return std::numeric_limits<int>::max();
 }
 
-void bStack::push(int val) {
-  bNode* node = new bNode(val);
-
+void bStack::push(int value) {
+  bNode* node = new bNode(value);
   node->next = m_top;
   m_top = node;
 
@@ -30,10 +24,6 @@ void bStack::push(int val) {
 }
 
 void bStack::pop() {
-  if (m_size == 0) {
-    return;
-  }
-
   bNode* node = m_top;
   m_top = m_top->next;
   delete node;
@@ -48,10 +38,10 @@ bStack::~bStack() {
 
 std::ostream& operator<<(std::ostream& os, const bStack& obj) {
   bNode* node = obj.getTop();
-
   while (node) {
     os << *node;
     node = node->next;
   }
+
   return os;
 }
