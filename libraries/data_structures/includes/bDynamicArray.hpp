@@ -2,12 +2,12 @@
 #ifndef BDYNAMIC_ARRAY_HPP
 #define BDYNAMIC_ARRAY_HPP
 
-#include <cstddef>
+#include <iostream>
 
 class bDynamicArray {
  private:
   size_t m_size{0};
-  int *m_data{nullptr};
+  int* m_data{nullptr};
 
  public:
   bDynamicArray() = default;
@@ -26,5 +26,7 @@ class bDynamicArray {
   void remove(size_t index);
   size_t size() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const bDynamicArray& obj);
 
 #endif  // BDYNAMIC_ARRAY_HPP

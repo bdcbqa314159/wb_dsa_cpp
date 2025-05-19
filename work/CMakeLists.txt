@@ -22,3 +22,7 @@ add_executable(work4 main4.cpp)
 target_include_directories(work4 PUBLIC ${includes})
 target_link_libraries(work4 data_structures)
 
+add_executable(work5 main5.cpp)
+target_include_directories(work5 PUBLIC ${includes})
+target_link_libraries(work5 data_structures)
+

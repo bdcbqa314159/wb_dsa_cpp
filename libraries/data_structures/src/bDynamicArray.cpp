@@ -31,7 +31,7 @@ int bDynamicArray::get(size_t index) const {
 void bDynamicArray::remove(size_t index) {
   if (index >= m_size) return;
 
-  int *old_data = m_data;
+  int* old_data = m_data;
   --m_size;
   m_data = new int[m_size];
 
@@ -47,9 +47,9 @@ void bDynamicArray::remove(size_t index) {
 }
 
 void bDynamicArray::insert(size_t index, int value) {
-  if (index >= m_size) return;
+  if (index > m_size) return;
 
-  int *old_data = m_data;
+  int* old_data = m_data;
   ++m_size;
   m_data = new int[m_size];
 
@@ -65,4 +65,14 @@ void bDynamicArray::insert(size_t index, int value) {
   }
 
   delete[] old_data;
+}
+
+std::ostream& operator<<(std::ostream& os, const bDynamicArray& obj) {
+  os << "[";
+  size_t i = 0;
+  for (; i < obj.size() - 1; ++i) {
+    os << obj.get(i) << ", ";
+  }
+  os << obj.get(i) << "]";
+  return os;
 }
