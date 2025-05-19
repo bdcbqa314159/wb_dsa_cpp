@@ -24,6 +24,10 @@ void bStack::push(int value) {
 }
 
 void bStack::pop() {
+  if (m_size == 0) {
+    return;
+  }
+
   bNode* node = m_top;
   m_top = m_top->next;
   delete node;
