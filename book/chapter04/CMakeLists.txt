@@ -14,3 +14,11 @@ set(sources_insertion_sort  insertion_sort.cpp)
 add_executable(insertion_sort_main ${sources_insertion_sort})
 target_include_directories(insertion_sort_main PUBLIC ${includes})
 
+set(sources_merge_sort  merge_sort.cpp)
+add_executable(merge_sort_main ${sources_merge_sort})
+target_include_directories(merge_sort_main PUBLIC ${includes})
+
+set(sources_quick_sort  quick_sort.cpp)
+add_executable(quick_sort_main ${sources_quick_sort})
+target_include_directories(quick_sort_main PUBLIC ${includes})
+
