@@ -22,3 +22,7 @@ set(sources_quick_sort  quick_sort.cpp)
 add_executable(quick_sort_main ${sources_quick_sort})
 target_include_directories(quick_sort_main PUBLIC ${includes})
 
+set(sources_counting_sort  counting_sort.cpp)
+add_executable(counting_sort_main ${sources_counting_sort})
+target_include_directories(counting_sort_main PUBLIC ${includes})
+
