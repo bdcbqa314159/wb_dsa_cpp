@@ -26,3 +26,6 @@ set(sources_counting_sort  counting_sort.cpp)
 add_executable(counting_sort_main ${sources_counting_sort})
 target_include_directories(counting_sort_main PUBLIC ${includes})
 
+set(sources_radix_sort  radix_sort.cpp)
+add_executable(radix_sort_main ${sources_radix_sort})
+target_include_directories(radix_sort_main PUBLIC ${includes})
