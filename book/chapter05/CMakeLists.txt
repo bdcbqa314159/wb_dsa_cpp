@@ -14,4 +14,8 @@ set(sources_ternary_search  ternary_search.cpp)
 add_executable(ternary_search_main ${sources_ternary_search})
 target_include_directories(ternary_search_main PUBLIC ${includes})
 
+set(sources_interpolation_search  interpolation_search.cpp)
+add_executable(interpolation_search_main ${sources_interpolation_search})
+target_include_directories(interpolation_search_main PUBLIC ${includes})
+
 
