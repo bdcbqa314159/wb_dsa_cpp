@@ -10,4 +10,8 @@ set(sources_binary_search  binary_search.cpp)
 add_executable(binary_search_main ${sources_binary_search})
 target_include_directories(binary_search_main PUBLIC ${includes})
 
+set(sources_ternary_search  ternary_search.cpp)
+add_executable(ternary_search_main ${sources_ternary_search})
+target_include_directories(ternary_search_main PUBLIC ${includes})
+
 
