@@ -18,4 +18,7 @@ set(sources_interpolation_search  interpolation_search.cpp)
 add_executable(interpolation_search_main ${sources_interpolation_search})
 target_include_directories(interpolation_search_main PUBLIC ${includes})
 
+set(sources_jump_search  jump_search.cpp)
+add_executable(jump_search_main ${sources_jump_search})
+target_include_directories(jump_search_main PUBLIC ${includes})
 
