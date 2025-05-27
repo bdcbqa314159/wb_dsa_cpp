@@ -22,3 +22,7 @@ set(sources_jump_search  jump_search.cpp)
 add_executable(jump_search_main ${sources_jump_search})
 target_include_directories(jump_search_main PUBLIC ${includes})
 
+set(sources_exponential_search  exponential_search.cpp)
+add_executable(exponential_search_main ${sources_exponential_search})
+target_include_directories(exponential_search_main PUBLIC ${includes})
+
